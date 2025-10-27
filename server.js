@@ -8,7 +8,11 @@ const cors = require("cors");
 
 const app = express();
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+  origin: "https://qemer-registration-frontend-mquefed79-blen-bizuayehus-projects.vercel.app",
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true
+}));
 connectDB();
 
 
