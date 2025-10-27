@@ -130,6 +130,7 @@ exports.addSchedule = async (req, res) => {
 
     const newSchedule = {
       days: req.body.days,
+      time:req.body.time,
       mode: req.body.mode,
       price: req.body.price
     };
@@ -163,6 +164,7 @@ exports.updateSchedule=async (req, res) => {
 
     // Explicitly update each field
     course.schedule[scheduleIndex].days = req.body.days;
+    course.schedule[scheduleIndex].time = req.body.time;
     course.schedule[scheduleIndex].mode = req.body.mode;
     course.schedule[scheduleIndex].price = req.body.price;
 

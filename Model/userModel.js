@@ -1,25 +1,26 @@
-const mongoose=require("mongoose");
+const mongoose = require('mongoose');
+const bcrypt = require('bcryptjs'); // For password hashing
 
-const UserSchema=mongoose.Schema(
-    {
-        userId:{
-            type:String,
-            required:true
-        },
-        userName:{
-            type:String,
-            required:true
-        },
-        password:{
-            type:String,
-            required:true
-        },
-        phone:{
-            type:String,
-            required:true
-        }
-    })
-    const User = mongoose.models.User || mongoose.model('User', UserSchema);
+const userSchema = new mongoose.Schema({
+  email: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+  password: {
+    type: String,
+    required: true,
+  },
+});
 
-    // Export it for use in your controllers/routes
-    module.exports = User;
+userSchema.pre('save', async function(next) {
+  if (!this.isModified('password')) {
+    return next();
+  }
+
+  // Hash the password before saving
+  this.password = await bcrypt.hash(this.password, 10);
+  next();
+});
+
+module.exports = mongoose.model('User', userSchema);

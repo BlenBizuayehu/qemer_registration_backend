@@ -23,6 +23,10 @@ const CourseSchema = new mongoose.Schema({
       type: String,
       required: true
     },
+    time:{
+      type: String,
+      required: true
+    },
     mode: {
       type: String,
       required: true,
